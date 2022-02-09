@@ -1,3 +1,4 @@
+//一个猜数字的小游戏,生成一个1-100的随机数,你有10次机会猜中它
 package main
 
 import (
@@ -16,7 +17,6 @@ func main() {
 	target := rand.Intn(100) + 1
 	fmt.Println("我们生成了一个随机数1-100的随机数!")
 	fmt.Println("你能猜一下它吗?")
-	fmt.Println(target)
 
 	success := false
 	reader := bufio.NewReader(os.Stdin)
