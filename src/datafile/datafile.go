@@ -1,3 +1,4 @@
+//使用切片 读取文件的内容
 package datafile
 
 import (
@@ -6,27 +7,28 @@ import (
 	"strconv"
 )
 
-func GetFloats(filename string) ([3]float64, error) {
-	var numbers[3]float64
+func GetFloats(filename string) ([]float64, error) {
+	var numbers []float64
 	file, err := os.Open(filename)
 	if err != nil {
 		return numbers, err
 	}
-	i := 0
 	scanner = bufio.NewScanner(file)
 	for scanner.Scan() {
-		numbers[i] , err = strconv.ParseFloat(scanner.Text(), 64)
 		if err != nil {
-			return numbers ,err
+			number, err := strconv.ParseFloat(scanner.Text())
+			if err != nil {
+				return nil ,err
+			}
+			numbers = append(numbers, number)
 		}
-		i++
 	}
 	err = file.Close()
 	if err != nil {
-		return numbers, err
+		return nil, err
 	}
 	if scanner.Err() != nil {
-		return numbers, scanner.Err()
+		return nil, scanner.Err()
 	}
 	return numbers, nil
 }
